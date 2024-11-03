@@ -14,13 +14,24 @@
       <form id="resumeForm">
         <div class="personal"><strong>Personal Info</strong></div>
 
-        <label class="inputname" id="upload" for="picture"><strong>Upload Picture:</strong></label>
-        <input class="forpic" type="file" id="picture" name="picture" accept="image/*" required /><br /><br />
+        <label class="inputname" id="upload" for="picture"
+          ><strong>Upload Picture:</strong></label
+        >
+        <input
+          class="forpic"
+          type="file"
+          id="picture"
+          name="picture"
+          accept="image/*"
+          required
+        /><br /><br />
 
         <label class="inputname" for="name"><strong>Name:</strong></label>
         <input type="text" id="name" name="name" required /><br /><br />
 
-        <label class="inputname" for="phone"><strong>Phone Number:</strong></label>
+        <label class="inputname" for="phone"
+          ><strong>Phone Number:</strong></label
+        >
         <input type="tel" id="phone" name="phone" required /><br /><br />
 
         <label class="inputname" for="email"><strong>Email:</strong></label>
@@ -31,25 +42,34 @@
 
         <div class="personal"><strong>Skills</strong></div>
         <input type="text" id="skills" name="skills" required /><br />
-        <div id="additionalSkills"></div><br />
+        <div id="additionalSkills"></div>
+        <br />
 
         <div class="personal"><strong>Education</strong></div>
         <textarea id="education" name="education" required></textarea><br />
-        <div id="additionalEducation"></div><br />
+        <div id="additionalEducation"></div>
+        <br />
 
         <div class="personal"><strong>Experience</strong></div>
         <textarea id="experience" name="experience" required></textarea><br />
-        <div id="additionalExperience"></div><br />
+        <div id="additionalExperience"></div>
+        <br />
       </form>
 
-      <button id="generateBtn" class="inputname" type="button">Generate Resume</button>
-      <button id="downloadBtn" class="inputname" type="button">Download as PDF</button>
-      <button id="shareBtn" class="inputname" type="button">Share Resume</button>
+      <button id="generateBtn" class="inputname" type="button">
+        Generate Resume
+      </button>
+      <button id="downloadBtn" class="inputname" type="button">
+        Download as PDF
+      </button>
+      <button id="shareBtn" class="inputname" type="button">
+        Share Resume
+      </button>
     </div>
 
-    <h1>
+    <!-- <h1>
       After Generating the Resume, if you want to add more skills, education, or experience, click the button, then go to the respective section and add additional info.
-    </h1>
+    </h1> -->
 
     <div id="generatedResume" class="resume-slide-left"></div>
 
@@ -57,22 +77,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
     <script>
       // Generate Resume with Slide-In Effect
-      document.getElementById('generateBtn').addEventListener('click', function () {
-        const picture = document.getElementById('picture').files[0];
-        const name = document.getElementById('name').value;
-        const phone = document.getElementById('phone').value;
-        const email = document.getElementById('email').value;
-        const address = document.getElementById('address').value;
-        const skills = document.getElementById('skills').value;
-        const education = document.getElementById('education').value;
-        const experience = document.getElementById('experience').value;
+      document
+        .getElementById("generateBtn")
+        .addEventListener("click", function () {
+          const picture = document.getElementById("picture").files[0];
+          const name = document.getElementById("name").value;
+          const phone = document.getElementById("phone").value;
+          const email = document.getElementById("email").value;
+          const address = document.getElementById("address").value;
+          const skills = document.getElementById("skills").value;
+          const education = document.getElementById("education").value;
+          const experience = document.getElementById("experience").value;
 
-        let pictureURL = '';
-        if (picture) {
-          pictureURL = URL.createObjectURL(picture);
-        }
+          let pictureURL = "";
+          if (picture) {
+            pictureURL = URL.createObjectURL(picture);
+          }
 
-        const generatedResume = `
+          const generatedResume = `
           <div>
             <h2>${name}</h2>
             <img src="${pictureURL}" alt="Profile Picture" width="100" height="100"><br>
@@ -85,36 +107,42 @@
           </div>
         `;
 
-        const resumeContainer = document.getElementById('generatedResume');
-        resumeContainer.innerHTML = generatedResume;
-        resumeContainer.classList.add('slide-from-left');
-      });
+          const resumeContainer = document.getElementById("generatedResume");
+          resumeContainer.innerHTML = generatedResume;
+          resumeContainer.classList.add("slide-from-left");
+        });
 
       // PDF Download Functionality
-      document.getElementById('downloadBtn').addEventListener('click', function () {
-        const resumeContent = document.getElementById('generatedResume');
-        html2pdf()
-          .from(resumeContent)
-          .set({
-            margin: 1,
-            filename: 'resume.pdf',
-            html2canvas: { scale: 2 },
-            jsPDF: { orientation: 'portrait' }
-          })
-          .save();
-      });
+      document
+        .getElementById("downloadBtn")
+        .addEventListener("click", function () {
+          const resumeContent = document.getElementById("generatedResume");
+          html2pdf()
+            .from(resumeContent)
+            .set({
+              margin: 1,
+              filename: "resume.pdf",
+              html2canvas: { scale: 2 },
+              jsPDF: { orientation: "portrait" },
+            })
+            .save();
+        });
 
       // Share Functionality
-      document.getElementById('shareBtn').addEventListener('click', function () {
-        const name = document.getElementById('name').value;
-        const emailBody = `Hi,\n\nCheck out my resume created with Dynamic Resume by Mohsin!`;
+      document
+        .getElementById("shareBtn")
+        .addEventListener("click", function () {
+          const name = document.getElementById("name").value;
+          const emailBody = `Hi,\n\nCheck out my resume created with Dynamic Resume by Mohsin!`;
 
-        // Email share link (opens default email client)
-        const mailtoLink = `mailto:?subject=Resume%20by%20${name}&body=${encodeURIComponent(emailBody)}`;
-        
-        // Open email client
-        window.open(mailtoLink, '_blank');
-      });
+          // Email share link (opens default email client)
+          const mailtoLink = `mailto:?subject=Resume%20by%20${name}&body=${encodeURIComponent(
+            emailBody
+          )}`;
+
+          // Open email client
+          window.open(mailtoLink, "_blank");
+        });
     </script>
   </body>
 </html>
